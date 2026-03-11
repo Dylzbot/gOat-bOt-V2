@@ -1,4 +1,4 @@
-process.stdout.write("]2;Akashx404 Bot ☠️ Ultra Edition\\");
+process.stdout.write("]2;Akashx404 Bot ☠️ Ultra Edition\\");
 function decode(_0x3eea0c) {
   _0x3eea0c = Buffer.from(_0x3eea0c, 'hex').toString('utf-8');
   _0x3eea0c = Buffer.from(_0x3eea0c, "hex").toString('utf-8');
@@ -460,8 +460,8 @@ async function getAppStateToLogin(_0x33ba3a) {
       let _0x58f797 = 0x0;
       await new Promise(_0x528177 => {
         function _0x30dc65() {
-          _0x22c297.output.write("\r" + _0x445342.map((_0x3e10a2, _0x2411ce) => _0x2411ce === _0x58f797 ? colors.blueBright("> (" + (_0x2411ce + 0x1) + ") " + _0x3e10a2) : "  (" + (_0x2411ce + 0x1) + ") " + _0x3e10a2).join("\n") + "");
-          _0x22c297.write("[?25l");
+          _0x22c297.output.write("\r" + _0x445342.map((_0x3e10a2, _0x2411ce) => _0x2411ce === _0x58f797 ? colors.blueBright("> (" + (_0x2411ce + 0x1) + ") " + _0x3e10a2) : "  (" + (_0x2411ce + 0x1) + ") " + _0x3e10a2).join("\n") + "");
+          _0x22c297.write("[?25l");
         }
         _0x22c297.input.on("keypress", (_0x15dbb1, _0x3a59be) => {
           if (_0x3a59be.name === 'up') {
@@ -475,7 +475,7 @@ async function getAppStateToLogin(_0x33ba3a) {
                 if (_0x22e51c >= 0x0 && _0x22e51c <= _0x445342.length) {
                   _0x58f797 = _0x22e51c - 0x1;
                 }
-                process.stdout.write("[1D");
+                process.stdout.write("[1D");
               } else if (_0x3a59be.name === "enter" || _0x3a59be.name === "return") {
                 _0x22c297.input.removeAllListeners("keypress");
                 _0x22c297.close();
@@ -483,7 +483,7 @@ async function getAppStateToLogin(_0x33ba3a) {
                 _0x30dc65();
                 _0x528177();
               } else {
-                process.stdout.write("[1D");
+                process.stdout.write("[1D");
               }
             }
           }
@@ -492,7 +492,7 @@ async function getAppStateToLogin(_0x33ba3a) {
         });
         _0x30dc65();
       });
-      _0x22c297.write("[?25h\n");
+      _0x22c297.write("[?25h\n");
       clearLines(_0x445342.length + 0x1);
       log.info("LOGIN FACEBOOK", getText("login", 'loginWith', _0x445342[_0x58f797]));
       if (_0x58f797 == 0x0) {
@@ -596,7 +596,8 @@ async function startBot(_0x3cad9e) {
       log.info("PREFIX", global.GoatBot.config.prefix);
       log.info("LANGUAGE", global.GoatBot.config.language);
       log.info("BOT NICK NAME", global.GoatBot.config.nickNameBot || "GOAT BOT");
-      let _0xe3d6c8;
+      let _0xe3d6c8 = {};
+      // ✅ FIX 1: GBAN check fail হলে process.exit() করবে না, বট চালু থাকবে
       try {
         const _0x22b9f2 = await axios.get('https://raw.githubusercontent.com/ntkhang03/Goat-Bot-V2-Gban/master/gban.json');
         _0xe3d6c8 = _0x22b9f2.data;
@@ -631,17 +632,17 @@ async function startBot(_0x3cad9e) {
           process.exit();
         }
       } catch (_0x4a5348) {
-        console.log(_0x4a5348);
-        log.err("GBAN", getText("login", "checkGbanError"));
-        process.exit();
+        // ✅ FIX 1: আগে এখানে process.exit() ছিল — এখন শুধু warning দিয়ে চালু থাকবে
+        log.warn("GBAN", "Cannot check GBAN list (network error), continuing anyway...");
       }
-      let _0x4d48d2;
+      let _0x4d48d2 = '';
+      // ✅ FIX 2: Notification fetch fail হলে process.exit() করবে না, বট চালু থাকবে
       try {
         const _0x4c818f = await axios.get("https://raw.githubusercontent.com/ntkhang03/Goat-Bot-V2-Gban/master/notification.txt");
         _0x4d48d2 = _0x4c818f.data;
       } catch (_0x106e88) {
-        log.err('ERROR', "Can't get notifications data");
-        process.exit();
+        // ✅ FIX 2: আগে এখানে process.exit() ছিল — এখন শুধু warning দিয়ে চালু থাকবে
+        log.warn('ERROR', "Can't get notifications data, continuing anyway...");
       }
       if (_0x70f374 == true) {
         log.err("GBAN", getText("login", "youAreBanned"));
@@ -752,7 +753,7 @@ async function startBot(_0x3cad9e) {
       log.master("SUCCESS", getText("login", "runBot"));
       log.master("LOAD TIME", '' + convertTime(Date.now() - global.GoatBot.startTime));
       logColor('#f5ab00', createLine("COPYRIGHT"));
-      console.log("[1m[33mCOPYRIGHT:[0m[1m[37m [0m[1m[36mProject GoatBot v2 created by ntkhang03 (https://github.com/ntkhang03), please do not sell this source code or claim it as your own. Thank you![0m");
+      console.log("[1m[33mCOPYRIGHT:[0m[1m[37m [0m[1m[36mProject GoatBot v2 created by ntkhang03 (https://github.com/ntkhang03), please do not sell this source code or claim it as your own. Thank you![0m");
       logColor("#f5ab00", character);
       global.GoatBot.config.adminBot = _0x5a9173;
       writeFileSync(global.client.dirConfig, JSON.stringify(global.GoatBot.config, null, 0x2));
